@@ -1,0 +1,213 @@
+#########################################################
+## CUSTOM VALUES
+[user]
+	name = Antonio Netto
+	email = hello@anetto.dev
+	
+[github]
+	user = anettodev
+
+[merge]
+	# Include summaries of merged commits in newly created merge commit messages
+	log = true
+	tool = opendiff
+	summary = true
+  	verbosity = 1
+
+[mergetool]
+	keepBackup = false
+
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+
+[alias]
+	# stash
+  	ss = stash                        # stash changes
+  	sl = stash list                   # list stashes
+  	sa = stash apply                  # apply stash (restore changes)
+  	sd = stash drop                   # drop stashes (destory changes)
+
+	# status
+  	s = status                        # status
+  	st = status                       # status
+  	stat = status                     # status
+
+	# diff
+  	d = diff                          # diff unstaged changes
+  	dc = diff --cached                # diff staged changes
+  	last = diff HEAD^                 # diff last committed change
+
+	# Shows list of contributors of a repository.
+  	contributors = shortlog --summary --numbered --email
+
+	# log
+	l = log --graph --date=short
+	lg = log -p
+	plog = log --pretty=format:\"%h %Cblue%cr%Creset %cn %Cgreen%s%Creset\"
+	graph = log --graph --pretty=oneline --abbrev-commit
+	changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
+	short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
+	simple = log --pretty=format:\" * %s\"
+	shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
+	# List commits in short form
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+
+	# List commits showing changed files
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	le = log --oneline --decorate
+
+	# add
+  	a = add                           # add
+	au = add -u # add changed files but not new ones.
+	
+	# tag
+  	t = tag -n                        # show tags with <n> lines of each tag message
+
+  	# List Aliases
+	la = "!git config -l | grep alias | cut -c 7-"
+
+	# Prune
+	pr = prune -v
+
+	# cherry-pick
+  	cp = cherry-pick -x               # grab a change from a branch
+
+	#############
+	# via http://philjackson.github.io/2013/04/07/handy-git-tips-to-stop-you-getting-fired.html
+  	snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+  	snapshots = !git stash list --grep snapshot
+
+  	#via http://stackoverflow.com/questions/5188320/how-can-i-get-a-list-of-git-branches-ordered-by-most-recent-commit
+  	recent-branches = !git for-each-ref --count=15 --sort=-committerdate refs/heads/ --format='%(refname:short)'
+	#############
+
+	# Removes a file from the index
+  	unstage = reset HEAD --
+	undo = reset --hard
+
+	mt = mergetool
+	
+	sub-update = "!git submodule update --init --recursive --remote"
+	checkouts = "!sh -c \"git submodule foreach --recursive 'git checkout $1'\""
+	pulls = "!sh -c \"git submodule foreach --recursive 'sleep 2 && git pull origin $1'\""
+	statuss = "!git submodule foreach --recursive git status"
+	pushs = "!git submodule foreach --recursive git push origin || true"
+	cleans = "!git submodule foreach --recursive 'git checkout . && git clean -df && git reset HEAD —-hard && git checkout master && git pull'"
+
+##########################################################
+## BE AWARE!
+## Most of the config below you do not need to change.
+##
+#########################################################
+[format]
+  pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
+
+[core]
+	# the parameter -w, --wait is to wait for window to be closed before returning. 
+	# Visual Studio Code is base on Atom Editor. if you also have atom installed execute the command atom --help. 
+	# You will see the last argument in the help is wait.
+	# Next time you do a git rebase -i HEAD~3 it will popup Visual Studio Code. 
+	# Once VSCode is close then Git will take back the lead.
+	editor = code --wait  
+
+	# Use custom `.gitignore` and `.gitattributes`
+	excludesfile = ~/.gitignore
+	attributesfile = ~/.gitattributes
+
+	# Treat spaces before tabs and all kinds of trailing whitespace as an error
+	# [default] trailing-space: looks for spaces at the end of a line
+	# [default] space-before-tab: looks for spaces before tabs at the beginning of a line
+	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+
+	# Make `git rebase` safer on OS X
+	# More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+	trustctime = false	
+
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+
+[apply]
+	# Detect whitespace errors when applying a patch
+	whitespace = fix
+
+[color]
+	# Use colors in Git commands that are capable of colored output when
+	# outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
+	ui = auto
+
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold # line info
+	old = red bold # deletions
+	new = green bold # additions
+
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+
+[diff]
+	# Git diff will use (i)ndex, (w)ork tree, (c)ommit and (o)bject
+  	# instead of a/b/c/d as prefixes for patches
+  	mnemonicprefix = true
+	algorithm = patience
+	# Detect copies as well as renames
+	renames = copies
+
+[help]
+	# Automatically correct and execute mistyped commands
+	autocorrect = 1
+
+[push]
+	# change to maching for machines with older versions of git 1.x.x
+	default = simple
+	autoSetupRemote = true
+
+[url "git@github.com:github"]
+	insteadOf = "https://github.com/github"
+	insteadOf = "github:github"
+	insteadOf = "git://github.com/github"
+
+[url "git@github.com:"]
+	pushInsteadOf = "https://github.com/"
+	pushInsteadOf = "github:"
+	pushInsteadOf = "git://github.com/"
+
+[url "git://github.com/"]
+	insteadOf = "github:"
+
+[url "git@gist.github.com:"]
+	insteadOf = "gst:"
+	pushInsteadOf = "gist:"
+	pushInsteadOf = "git://gist.github.com/"
+
+[url "git://gist.github.com/"]
+	insteadOf = "gist:"
+
+# Uncomment if you want fetch to also get all github pull requests, this is rather
+# large on big repos.
+#[remote "origin"]
+	#fetch = +refs/pull/*/head:refs/remotes/origin/pull/*
+
+[commit]
+	gpgsign = false
+
+[pull]
+	rebase = true
+
+[rerere]
+  # Remember my merges
+  # http://gitfu.wordpress.com/2008/04/20/git-rerere-rereremember-what-you-did-last-time/
+  enabled = true
