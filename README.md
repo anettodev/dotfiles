@@ -1,5 +1,5 @@
 # ANetto.dev dotfiles
-**Warning:** This repo is based in many others dotfiles REPOs. Mainly the [@mathiasbynens](https://github.com/mathiasbynens/dotfiles).
+This repo is based in many others dotfiles REPOs. Mainly the [@mathiasbynens](https://github.com/mathiasbynens/dotfiles).
 
 ## Installation
 
@@ -33,16 +33,4 @@ Here’s an example `~/.path` file that adds `/usr/local/bin` to the `$PATH`:
 
 ```bash
 export PATH="/usr/local/bin:$PATH"
-```
-
-```
-
-You could also use `~/.extra` to override settings, functions and aliases from my dotfiles repository. It’s probably better to [fork this repository](https://github.com/mathiasbynens/dotfiles/fork) instead, though.
-
-### Sensible macOS defaults
-
-When setting up a new Mac, you may want to set some sensible macOS defaults:
-
-```bash
-./.macos
 ```
