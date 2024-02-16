@@ -1,5 +1,5 @@
 # ANetto.dev dotfiles
-This repo is based in many others dotfiles REPOs. Mainly the [@mathiasbynens](https://github.com/mathiasbynens/dotfiles).
+This repo is based in many others dotfiles REPOs. Mainly the [@mathiasbynens REPO](https://github.com/mathiasbynens/dotfiles).
 
 ## Installation
 
@@ -7,30 +7,28 @@ This repo is based in many others dotfiles REPOs. Mainly the [@mathiasbynens](ht
 
 ### Using Git and the setup script
 
-You can clone the repository wherever you want. (I like to keep it in `~/Projects/dotfiles`, with `~/dotfiles` as a symlink.) The bootstrapper script will pull in the latest version and copy the files to your home folder.
+All files gonna stay in `~/.dotfiles`
 
 ```bash
-git clone git@github.com:anettodev/dotfiles.git && cd dotfiles && source anettoSetup.sh
+git clone git@github.com:anettodev/dotfiles.git ~/.dotfiles
 ```
 
-To update, `cd` into your local `dotfiles` repository and then:
+To update your system, `cd` into your local `~/.dotfiles` repository and then:
 
 ```bash
-source anettoSetup.sh
+source bootstrap.sh
 ```
 
-Alternatively, to update while avoiding the confirmation prompt:
+PS: This will install the basic stuffs like `Xcode`, `Oh My ZSH`, `ZSH plugins`, `.gitconfig`, `powerlevel10k`.
+
+### Brew Deps + macOS flags
+
+You also can run this scripts to install some cool dependencies and macOS system flags:
 
 ```bash
-set -- -f; source anettoSetup.sh
+source brew.sh
 ```
 
-### Specify the `$PATH`
-
-If `~/.path` exists, it will be sourced along with the other files, before any feature testing (such as [detecting which version of `ls` is being used](https://github.com/mathiasbynens/dotfiles/blob/aff769fd75225d8f2e481185a71d5e05b76002dc/.aliases#L21-L26)) takes place.
-
-Here’s an example `~/.path` file that adds `/usr/local/bin` to the `$PATH`:
-
 ```bash
-export PATH="/usr/local/bin:$PATH"
+source macos.sh
 ```
