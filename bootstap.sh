@@ -69,4 +69,3 @@ ln -s ~/.dotfiles/.zshrc ~/.zshrc
 # exec zsh
 zsh
 source ~/.zshrc
-
