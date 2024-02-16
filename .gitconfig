@@ -1,12 +1,13 @@
 #########################################################
-## CUSTOM VALUES
+## CUSTOM VALUES - CHANGE THIS IF YOU ARE NOT ME!
+#########################################################
 [user]
 	name = Antonio Netto
-	email = hello@anetto.dev
+	email = 788332+anettodev@users.noreply.github.com
 	
 [github]
 	user = anettodev
-
+#########################################################
 [merge]
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
@@ -89,6 +90,7 @@
   	unstage = reset HEAD --
 	undo = reset --hard
 
+	# my stuffs
 	mt = mergetool
 	
 	sub-update = "!git submodule update --init --recursive --remote"
