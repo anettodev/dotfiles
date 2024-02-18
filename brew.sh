@@ -114,6 +114,7 @@ brew install zopfli
 
 brew install node # This installs `npm` too using the recommended installation method
 brew install python3
+sudo ln -s /usr/bin/python3 /usr/local/bin/python
 brew install pygments # For syntax highlighting in c (instead cat)
 brew install thefuck
 brew install pcre
